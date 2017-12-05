@@ -18,8 +18,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.myView = (OpenView *)self.view;
-    unsigned a = 0;
-    NSLog(@"%d",-a);
+    short int a = -12345;
+    unsigned short  b = a;
+    NSLog(@"%d",b);
 }
 
 

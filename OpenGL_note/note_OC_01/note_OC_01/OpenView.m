@@ -163,6 +163,7 @@
 
 
         CGFloat scale = [[UIScreen mainScreen] scale]; //获取视图放大倍数，可以把scale设置为1试试
+    //告诉OpenGL渲染窗口的尺寸大小
         glViewport(self.frame.origin.x * scale, self.frame.origin.y * scale, self.frame.size.width * scale, self.frame.size.height * scale); //设置视口大小
     
         //读取文件路径
@@ -205,9 +206,16 @@
         GLuint attrBuffer;
         //生成新缓存对象
         glGenBuffers(1, &attrBuffer);
-        //绑定缓存对象
+        //绑定缓存对象 顶点缓冲对象的缓冲类型是GL_ARRAY_BUFFER
         glBindBuffer(GL_ARRAY_BUFFER, attrBuffer);
         //将顶点数据拷贝到缓存对象中
+        /**
+         第四个参数指定了我们希望显卡如何管理给定的数据。它有三种形式
+         GL_STATIC_DRAW ：数据不会或几乎不会改变。
+         GL_DYNAMIC_DRAW：数据会被改变很多。
+         GL_STREAM_DRAW ：数据每次绘制时都会改变。
+         
+         */
         glBufferData(GL_ARRAY_BUFFER, sizeof(attrArr), attrArr, GL_DYNAMIC_DRAW);
     
         GLuint position = glGetAttribLocation(self.myProgram, "position");
@@ -332,6 +340,11 @@
     // 设置为当前 framebuffer
     glBindFramebuffer(GL_FRAMEBUFFER, self.myColorFrameBuffer);
     // 将 _colorRenderBuffer 装配到 GL_COLOR_ATTACHMENT0 这个装配点上
+    /*
+     glFramebufferRenderbuffer (GLenum target, GLenum attachment, GLenum renderbuffertarget, GLuint renderbuffer)
+     
+     GL_COLOR_ATTACHMENT0, GL_DEPTH_ATTACHMENT, GL_STENCIL_ATTACHMENT中的一个，分别对应 color，depth和 stencil三大buffer。
+     **/
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
                               GL_RENDERBUFFER, self.myColorRenderBuffer);
 }
