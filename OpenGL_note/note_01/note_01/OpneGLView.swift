@@ -89,9 +89,9 @@ class OpneGLView: UIView {
             -0.5 , -0.5, 0.0,
             0.5 , -0.5 , 0.0 ]
         let texCoords : [GLfloat] = [
-            0,0,
-            1,0,
-            0,1]
+            0,0, 1.0,
+            1,0, 0.0,
+            0,1, 1.0]
         
 //        var attrBuffer : GLuint = 0
 //        glGenBuffers(1, &attrBuffer)
@@ -107,9 +107,9 @@ class OpneGLView: UIView {
         
        
         glEnableVertexAttribArray(positionSlot)
-      //  glEnableVertexAttribArray(textCoor)
+        glEnableVertexAttribArray(atextCoor)
         // 加载纹理
-       // self.setupTexture(fileName: "for_test")
+        self.setupTexture(fileName: "for_test")
         let rotate = glGetUniformLocation(myProgram, "rotateMatrix")
         let radians = 10 * 3.14 / 180.0
         let s = GLfloat(sin(radians))
@@ -151,12 +151,18 @@ class OpneGLView: UIView {
         }
         let width = spriteImage!.height
         let height = spriteImage!.width
-        let spriteData = calloc(width * height, MemoryLayout.size(ofValue: GLubyte.self))
+        //let spriteData = calloc(width * height, MemoryLayout.size(ofValue: GLubyte.self))
+        let spriteData = UnsafeMutablePointer<GLubyte>.allocate(capacity: width * height * 4)
+        //var a = getConstPointerType(ptr: &spriteData)
+        //let alt = UnsafeMutablePointer<GLubyte>.allocate(capacity: 12)
         let spriteContext = CGContext.init(data: spriteData, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * 4, space: (spriteImage?.colorSpace)!, bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
-//
 //        //在CGContextRef上绘图
         spriteContext!.draw(spriteImage!, in: CGRect(x: 0, y: 0, width: width, height: height))
         
+//        glEnable(GLenum(GL_TEXTURE_2D))
+//        var textureId : GLuint = 0
+//
+//        glGenTextures(1, &textureId)
         
         glBindTexture(GLenum(GL_TEXTURE_2D), 0)
         glTexParameteri(GLenum(GL_TEXTURE_2D),GLenum(GL_TEXTURE_MIN_FILTER), GLint(GL_LINEAR))
@@ -166,13 +172,11 @@ class OpneGLView: UIView {
         let fw = width , fh = height
         glTexImage2D(GLenum(GL_TEXTURE_2D), 0, GLint(GL_RGBA), GLsizei(fw), GLsizei(fh), 0, GLenum(GL_RGBA), GLenum(GL_UNSIGNED_BYTE), spriteData)
         glBindTexture(GLenum(GL_TEXTURE_2D), 0)
-        free(spriteData)
+       // free(spriteData)
         
     }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
 }

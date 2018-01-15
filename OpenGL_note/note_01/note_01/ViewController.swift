@@ -7,14 +7,23 @@
 //
 
 import UIKit
-
+import renttaxi
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let openView = OpneGLView(frame: self.view.bounds)
+        let vc = RenttaxiController()
         
-        self.view.addSubview(openView)
+        
+        
+        
+        
+        
+        //QSLog.DDLog(message: self)
+        //NumberFormatterTool().changeFormatter()
+        gcdasync().asfunction()
+        //self.view.addSubview(openView)
         
         // Do any additional setup after loading the view, typically from a nib.
     }
