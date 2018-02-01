@@ -195,12 +195,12 @@
         //前三个是顶点坐标， 后面两个是纹理坐标
         GLfloat attrArr[] =
         {
-            0.5f, -0.5f, -1.0f,     1.0f, 1.0f,
-            -0.5f, 0.5f, -1.0f,     0.0f, 0.0f,
-            -0.5f, -0.5f, -1.0f,    0.0f, 1.0f,
-//            0.5f, 0.5f, -1.0f,      1.0f, 0.0f,
-//            -0.5f, 0.5f, -1.0f,     0.0f, 0.0f,
-//            0.5f, -0.5f, -1.0f,     1.0f, 1.0f,
+            0.5f, -0.5f, -1.0f,     1.0f, 0.0f,
+            -0.5f, 0.5f, -1.0f,     0.0f, 1.0f,
+            -0.5f, -0.5f, -1.0f,    0.0f, 0.0f,
+            0.5f, 0.5f, -1.0f,      1.0f, 1.0f,
+            -0.5f, 0.5f, -1.0f,     0.0f, 1.0f,
+            0.5f, -0.5f, -1.0f,     1.0f, 0.0f,
         };
     
         GLuint attrBuffer;
@@ -245,7 +245,7 @@
         };
     
         //设置旋转矩阵
-        glUniformMatrix4fv(rotate, 1, GL_FALSE, (GLfloat *)&zRotation[0]);
+       // glUniformMatrix4fv(rotate, 1, GL_FALSE, (GLfloat *)&zRotation[0]);
     
         glDrawArrays(GL_TRIANGLES, 0, 3);
     

@@ -8,6 +8,10 @@
 
 import UIKit
 
+let v_type = GL_VERTEX_SHADER
+let f_type = GL_FRAGMENT_SHADER
+
+
 class GLESUtils: NSObject {
     class  func loadShader(type:GLenum,filepath:String) ->GLuint {
         let shaderString : String?
@@ -32,6 +36,7 @@ class GLESUtils: NSObject {
             return 0
         }
         var shaderStringUTF8 = (shaderString as NSString).utf8String
+        //glShaderSource(shader, 1, &shaderStringUTF8, nil)
         //着色器源码附加到着色器对象上
         glShaderSource(shader, 1, &shaderStringUTF8, nil)
         //把着色器源代码编译成目标代码

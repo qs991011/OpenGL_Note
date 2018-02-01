@@ -12,5 +12,5 @@ void main()
 
     vPos = vPos * rotateMatrix;
 
-    gl_Position = vPos;
+    gl_Position = position;
 }
