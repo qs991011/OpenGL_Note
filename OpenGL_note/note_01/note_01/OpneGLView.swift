@@ -153,14 +153,7 @@ class OpneGLView: UIView {
         glUseProgram(myProgram)
         // Get attribute slot from program
         //let name = "vPosition"
-        
     }
-    
-
-
-    
-   
-
     
     func setupTexture(fileName:String) {
         // 获取图片的CGImageRef
